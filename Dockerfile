@@ -12,7 +12,8 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
 RUN mkdir -p /var/run/sshd
 
 # Install JDK 7 (latest edition)
-#RUN apt-get install -y openjdk-7-jdk
+RUN apt-get update
+RUN apt-get install -y openjdk-8-jdk
 
 # Add user jenkins to the image
 RUN adduser --quiet jenkins
@@ -31,6 +32,8 @@ RUN curl -L -o /tmp/docker-latest.tgz https://get.docker.com/builds/Linux/x86_64
   && groupadd staff \
   && adduser jenkins docker \
   && adduser root docker
+RUN curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)"
+RUN chmod +x /usr/local/bin/docker-compose
 
 RUN mkdir -p /tmp/scripts/
 ADD bootstrap.sh /tmp/scripts/bootstrap.sh

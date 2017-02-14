@@ -5,6 +5,9 @@ MAINTAINER Kishore Bhatia <bhatia dot kishore at gmail dot com>
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get install -y git
+RUN apt-get install -y sudo
+RUN apt-get install -y apt-transport-https
+RUN apt-get install -y lsb-release
 RUN apt-get install curl
 # Install a basic SSH server
 RUN apt-get install -y openssh-server
@@ -35,6 +38,7 @@ RUN curl -L -o /tmp/docker-latest.tgz https://get.docker.com/builds/Linux/x86_64
 RUN curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)"
 RUN chmod +x /usr/local/bin/docker-compose
 
+#run bootstrap script
 RUN mkdir -p /tmp/scripts/
 ADD bootstrap.sh /tmp/scripts/bootstrap.sh
 RUN chmod +x /tmp/scripts/bootstrap.sh

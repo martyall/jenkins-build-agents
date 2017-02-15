@@ -8,6 +8,8 @@ USER="jenkins"
 #else sudo=sudo
 #fi
 
+chown :docker /var/run/docker.sock
+
 echo >&3 "Installing Haskell Stack..."
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442
 apt-get update
